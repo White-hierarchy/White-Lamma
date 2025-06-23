@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Lamma - Discover Local Businesses</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #ef4444;
+            --primary-light: #f87171;
+            --primary-dark: #dc2626;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .business-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .star-rating {
+            color: #f59e0b;
+        }
+        
+        .navbar {
+            transition: all 0.3s ease;
+            background-color: rgba(17, 24, 39, 0.9);
+        }
+        
+        .navbar.scrolled {
+            background-color: rgba(17, 24, 39, 0.95);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .mobile-menu.active {
+            max-height: 500px;
+        }
+        
+        .review-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .app-screen {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navigation -->
+    <nav class="navbar fixed w-full z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="#" class="text-white text-2xl font-bold flex items-center">
+                        <i class="fas fa-utensils mr-2"></i>
+                        <span>White Lamma</span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#" class="text-white hover:text-red-300 transition">Home</a>
+                    <a href="#" class="text-white hover:text-red-300 transition">Restaurants</a>
+                    <a href="#" class="text-white hover:text-red-300 transition">Categories</a>
+                    <a href="#" class="text-white hover:text-red-300 transition">Write a Review</a>
+                    <div class="relative group">
+                        <button class="text-white hover:text-red-300 flex items-center transition">
+                            <span>More</span>
+                            <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden group-hover:block">
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">About Us</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Blog</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Contact</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Auth Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#" class="text-white hover:text-red-300 transition">Log In</a>
+                    <a href="#" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition">Sign Up</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="mobile-menu md:hidden">
+                <div class="pt-4 pb-2 space-y-2">
+                    <a href="#" class="block text-white hover:bg-gray-700 px-3 py-2 rounded-md transition">Home</a>
+                    <a href="#" class="block text-white hover:bg-gray-700 px-3 py-2 rounded-md transition">Restaurants</a>
+                    <a href="#" class="block text-white hover:bg-gray-700 px-3 py-2 rounded-md transition">Categories</a>
+                    <a href="#" class="block text-white hover:bg-gray-700 px-3 py-2 rounded-md transition">Write a Review</a>
+                    <div class="border-t border-gray-700 mt-2 pt-2">
+                        <a href="#" class="block text-white hover:bg-gray-700 px-3 py-2 rounded-md transition">Log In</a>
+                        <a href="#" class="block bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded-md text-center transition">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg h-screen flex items-center justify-center pt-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">Find the Best Local Businesses</h1>
+            <p class="text-xl text-white mb-8 max-w-2xl mx-auto">Discover great places to eat, shop, and visit based on real reviews from people like you</p>
+            <div class="bg-white p-4 rounded-lg shadow-lg max-w-4xl mx-auto flex flex-col md:flex-row">
+                <div class="flex-1 mb-2 md:mb-0 md:mr-2">
+                    <input type="text" placeholder="Find: restaurants, coffee, bars..." class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                </div>
+                <div class="flex-1 mb-2 md:mb-0 md:mx-2">
+                    <input type="text" placeholder="Near: city, neighborhood, address" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                </div>
+                <button class="bg-red-500 hover:bg-red-600 text-white p-3 rounded-md md:ml-2 transition duration-300">
+                    <i class="fas fa-search mr-2"></i> Search
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4">Browse Businesses by Category</h2>
+            <p class="text-lg text-gray-600 text-center mb-10 max-w-2xl mx-auto">Explore popular categories to find exactly what you're looking for</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="category-card bg-gradient-to-br from-red-500 to-red-600 rounded-lg p-6 text-center text-white transition duration-300 cursor-pointer">
+                    <i class="fas fa-utensils text-4xl mb-4"></i>
+                    <h3 class="text-xl font-semibold">Restaurants</h3>
+                    <p class="text-sm opacity-80 mt-2">12,345 listings</p>
+                </div>
+                <div class="category-card bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-6 text-center text-white transition duration-300 cursor-pointer">
+                    <i class="fas fa-coffee text-4xl mb-4"></i>
+                    <h3 class="text-xl font-semibold">Coffee & Tea</h3>
+                    <p class="text-sm opacity-80 mt-2">5,678 listings</p>
+                </div>
+                <div class="category-card bg-gradient-to-br from-green-500 to-green-600 rounded-lg p-6 text-center text-white transition duration-300 cursor-pointer">
+                    <i class="fas fa-shopping-bag text-4xl mb-4"></i>
+                    <h3 class="text-xl font-semibold">Shopping</h3>
+                    <p class="text-sm opacity-80 mt-2">8,901 listings</p>
+                </div>
+                <div class="category-card bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg p-6 text-center text-white transition duration-300 cursor-pointer">
+                    <i class="fas fa-spa text-4xl mb-4"></i>
+                    <h3 class="text-xl font-semibold">Beauty & Spas</h3>
+                    <p class="text-sm opacity-80 mt-2">3,456 listings</p>
+                </div>
+                <div class="category-card bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-lg p-6 text-center text-white transition duration-300 cursor-pointer">
+                    <i class="fas fa-home text-4xl mb-4"></i>
+                    <h3 class="text-xl font-semibold">Home Services</h3>
+                    <p class="text-sm opacity-80 mt-2">7,890 listings</p>
+                </div>
+                <div class="category-card bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg p-6 text-center text-white transition duration-300 cursor-pointer">
+                    <i class="fas fa-car text-4xl mb-4"></i>
+                    <h3 class="text-xl font-semibold">Auto Services</h3>
+                    <p class="text-sm opacity-80 mt-2">4,321 listings</p>
+                </div>
+                <div class="category-card bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg p-6 text-center text-white transition duration-300 cursor-pointer">
+                    <i class="fas fa-heartbeat text-4xl mb-4"></i>
+                    <h3 class="text-xl font-semibold">Health & Medical</h3>
+                    <p class="text-sm opacity-80 mt-2">6,543 listings</p>
+                </div>
+                <div class="category-card bg-gradient-to-br from-gray-600 to-gray-700 rounded-lg p-6 text-center text-white transition duration-300 cursor-pointer">
+                    <i class="fas fa-ellipsis-h text-4xl mb-4"></i>
+                    <h3 class="text-xl font-semibold">More Categories</h3>
+                    <p class="text-sm opacity-80 mt-2">10,000+ listings</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Businesses -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4">Featured Businesses</h2>
+            <p class="text-lg text-gray-600 text-center mb-10 max-w-2xl mx-auto">Popular spots based on quality reviews and community engagement</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Business Card 1 -->
+                <div class="business-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="h-48 bg-gray-300 relative">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Restaurant" class="w-full h-full object-cover">
+                        <div class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-xs font-bold">
+                            Featured
+                        </div>
+                        <div class="absolute bottom-2 right-2 bg-gray-900 bg-opacity-70 text-white px-2 py-1 rounded text-sm">
+                            <i class="fas fa-camera mr-1"></i> 24
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-xl font-bold text-gray-800 hover:text-red-500 cursor-pointer">The Tasty Table</h3>
+                            <div class="star-rating text-lg">★★★★☆ <span class="text-sm text-gray-500">(128)</span></div>
+                        </div>
+                        <div class="flex mt-2 text-sm">
+                            <span class="bg-gray-200 text-gray-700 px-2 py-1 rounded mr-2">Italian</span>
+                            <span class="bg-gray-200 text-gray-700 px-2 py-1 rounded mr-2">$$</span>
+                            <span class="bg-gray-200 text-gray-700 px-2 py-1 rounded">Downtown</span>
+                        </div>
+                        <p class="mt-4 text-gray-600 text-sm">"Amazing pasta and great service! The ambiance is perfect for date night."</p>
+                        <div class="mt-4 flex items-center">
+                            <img class="h-10 w-10 rounded-full bg-gray-300" src="https://randomuser.me/api/portraits/women/43.jpg" alt="User">
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-900">Sarah J.</p>
+                                <p class="text-xs text-gray-500">Local Guide • 42 reviews</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Card 2 -->
+                <div class="business-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="h-48 bg-gray-300 relative">
+                        <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Cafe" class="w-full h-full object-cover">
+                        <div class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-xs font-bold">
+                            Popular
+                        </div>
+                        <div class="absolute bottom-2 right-2 bg-gray-900 bg-opacity-70 text-white px-2 py-1 rounded text-sm">
+                            <i class="fas fa-camera mr-1"></i> 18
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-xl font-bold text-gray-800 hover:text-red-500 cursor-pointer">Brew & Bean Café</h3>
+                            <div class="star-rating text-lg">★★★★★ <span class="text-sm text-gray-500">(245)</span></div>
+                        </div>
+                        <div class="flex mt-2 text-sm">
+                            <span class="bg-gray-200 text-gray-700 px-2 py-1 rounded mr-2">Coffee</span>
+                            <span class="bg-gray-200 text-gray-700 px-2 py-1 rounded mr-2">$</span>
+                            <span class="bg-gray-200 text-gray-700 px-2 py-1 rounded">Midtown</span>
+                        </div>
+                        <p class="mt-4 text-gray-600 text-sm">"Best coffee in town! Their pastries are freshly baked and delicious."</p>
+                        <div class="mt-4 flex items-center">
+                            <img class="h-10 w-10 rounded-full bg-gray-300" src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-900">Michael T.</p>
+                                <p class="text-xs text-gray-500">Local Guide • 27 reviews</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Card 3 -->
+                <div class="business-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="h-48 bg-gray-300 relative">
+                        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Spa" class="w-full h-full object-cover">
+                        <div class="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-xs font-bold">
+                            New
+                        </div>
+                        <div class="absolute bottom-2 right-2 bg-gray-900 bg-opacity-70 text-white px-2 py-1 rounded text-sm">
+                            <i class="fas fa-camera mr-1"></i> 32
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-xl font-bold text-gray-800 hover:text-red-500 cursor-pointer">Zen Spa & Wellness</h3>
+                            <div class="star-rating text-lg">★★★★☆ <span class="text-sm text-gray-500">(87)</span></div>
+                        </div>
+                        <div class="flex mt-2 text-sm">
+                            <span class="bg-gray-200 text-gray-700 px-2 py-1 rounded mr-2">Spa</span>
+                            <span class="bg-gray-200 text-gray-700 px-2 py-1 rounded mr-2">$$$</span>
+                            <span class="bg-gray-200 text-gray-700 px-2 py-1 rounded">Uptown</span>
+                        </div>
+                        <p class="mt-4 text-gray-600 text-sm">"Incredible massage and facial. The staff is professional and attentive."</p>
+                        <div class="mt-4 flex items-center">
+                            <img class="h-10 w-10 rounded-full bg-gray-300" src="https://randomuser.me/api/portraits/women/65.jpg" alt="User">
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-900">Emily R.</p>
+                                <p class="text-xs text-gray-500">Local Guide • 15 reviews</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <button class="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-md font-medium transition duration-300">
+                    View More Businesses <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Reviews -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4">Recent Reviews</h2>
+            <p class="text-lg text-gray-600 text-center mb-10 max-w-2xl mx-auto">See what people are saying about local businesses</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Review 1 -->
+                <div class="review-card bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <img class="h-12 w-12 rounded-full bg-gray-300" src="https://randomuser.me/api/portraits/men/75.jpg" alt="User">
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Alex W.</h4>
+                            <div class="flex items-center">
+                                <div class="star-rating text-md mr-2">★★★★★</div>
+                                <div class="text-sm text-gray-500">2 days ago</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <h3 class="font-bold mt-2 hover:text-red-500 cursor-pointer">The Tasty Table</h3>
+                        <div class="flex mt-1 text-sm">
+                            <span class="bg-gray-200 text-gray-700 px-2 py-1 rounded mr-2">Italian</span>
+                            <span class="bg-gray-200 text-gray-700 px-2 py-1 rounded">$$</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"I had the most amazing dinner here last night! The pasta was cooked to perfection and the service was impeccable. Will definitely be coming back soon!"</p>
+                    <div class="mt-4 flex space-x-2">
+                        <button class="text-gray-500 hover:text-red-500 flex items-center transition duration-300">
+                            <i class="far fa-thumbs-up mr-1"></i> Useful (12)
+                        </button>
+                        <button class="text-gray-500 hover:text-red-500 flex items-center transition duration-300">
+                            <i class="far fa-laugh mr-1"></i> Funny (3)
+                        </button>
+                        <button class="text-gray-500 hover:text-red-500 flex items-center transition duration-300">
+                            <i class="far fa-grin-hearts mr-1"></i> Cool (5)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="review-card bg-gray-50 rounded-lg p-6 shadow-sm hover:shadow-md transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <img class="h-12 w-12 rounded-full bg-gray-300" src="https://randomuser.me/api/portraits/women/33.jpg" alt="User">
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Jessica L.</h4>
+                            <div class="flex items-center">
+                                <div class="star-rating text-md mr-2">★★★☆☆</div>
+                                <div class="text-sm text-gray-500">1 week ago</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <h3 class="font-bold mt-2 hover:text-red-500 cursor-pointer">Brew & Bean Café</h3>
+                        <div class="flex mt-1 text-sm">
+                            <span class="bg-gray-200 text-gray-700 px-2 py-1 rounded mr-2">Coffee</span>
+                            <span class="bg-gray-200 text-gray-700 px-2 py-1 rounded">$</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">"The coffee was good but the service was a bit slow. I had to wait almost 15 minutes for my latte. The pastries are delicious though, especially the blueberry muffin!"</p>
+                    <div class="mt-4 flex space-x-2">
+                        <button class="text-gray-500 hover:text-red-500 flex items-center transition duration-300">
+                            <i class="far fa-thumbs-up mr-1"></i> Useful (8)
+                        </button>
+                        <button class="text-gray-500 hover:text-red-500 flex items-center transition duration-300">
+                            <i class="far fa-laugh mr-1"></i> Funny (1)
+                        </button>
+                        <button class="text-gray-500 hover:text-red-500 flex items-center transition duration-300">
+                            <i class="far fa-grin-hearts mr-1"></i> Cool (2)
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <button class="bg-white border border-red-500 text-red-500 hover:bg-red-50 px-8 py-3 rounded-md font-medium transition duration-300">
+                    See More Reviews <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile App Section -->
+    <section class="py-16 bg-gradient-to-r from-red-500 to-red-600 text-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Download the FoodFinder App</h2>
+                    <p class="text-lg mb-6">Find great local businesses, leave reviews, and discover new favorites on the go.</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <button class="bg-black hover:bg-gray-800 text-white px-6 py-3 rounded-md flex items-center justify-center transition duration-300">
+                            <i class="fab fa-apple text-2xl mr-2"></i>
+                            <div class="text-left">
+                                <div class="text-xs">Download on the</div>
+                                <div class="text-lg font-semibold">App Store</div>
+                            </div>
+                        </button>
+                        <button class="bg-black hover:bg-gray-800 text-white px-6 py-3 rounded-md flex items-center justify-center transition duration-300">
+                            <i class="fab fa-google-play text-2xl mr-2"></i>
+                            <div class="text-left">
+                                <div class="text-xs">Get it on</div>
+                                <div class="text-lg font-semibold">Google Play</div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="app-screen w-64 h-96 bg-white rounded-3xl shadow-xl p-2 transform rotate-3 relative">
+                        <div class="w-full h-full bg-gray-100 rounded-2xl overflow-hidden relative">
+                            <div class="absolute inset-0 bg-gradient-to-b from-red-100 to-white">
+                                <div class="p-4">
+                                    <div class="flex justify-between items-center mb-4">
+                                        <h3 class="font-bold text-gray-800">Nearby Restaurants</h3>
+                                        <i class="fas fa-search text-gray-500"></i>
+                                    </div>
+                                    
+                                    <div class="bg-white rounded-lg shadow-sm p-3 mb-3">
+                                        <div class="flex">
+                                            <div class="w-16 h-16 bg-red-200 rounded-lg mr-3"></div>
+                                            <div>
+                                                <h4 class="font-semibold text-sm">The Tasty Table</h4>
+                                                <div class="star-rating text-xs">★★★★☆</div>
+                                                <p class="text-xs text-gray-500">Italian • $$ • 0.5mi</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-white rounded-lg shadow-sm p-3 mb-3">
+                                        <div class="flex">
+                                            <div class="w-16 h-16 bg-blue-200 rounded-lg mr-3"></div>
+                                            <div>
+                                                <h4 class="font-semibold text-sm">Brew & Bean Café</h4>
+                                                <div class="star-rating text-xs">★★★★★</div>
+                                                <p class="text-xs text-gray-500">Coffee • $ • 0.3mi</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-white rounded-lg shadow-sm p-3">
+                                        <div class="flex">
+                                            <div class="w-16 h-16 bg-green-200 rounded-lg mr-3"></div>
+                                            <div>
+                                                <h4 class="font-semibold text-sm">Zen Spa & Wellness</h4>
+                                                <div class="star-rating text-xs">★★★★☆</div>
+                                                <p class="text-xs text-gray-500">Spa • $$$ • 1.2mi</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Owner Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">Own a Business?</h2>
+            <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">Claim your business page and attract more customers. Respond to reviews and showcase what makes your business unique.</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <button class="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-md font-medium transition duration-300">
+                    Claim Your Business Page
+                </button>
+                <button class="bg-white border border-gray-300 hover:bg-gray-100 text-gray-700 px-8 py-3 rounded-md font-medium transition duration-300">
+                    Learn More
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-16 bg-white border-t border-gray-200">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
+            <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">Subscribe to our newsletter for the latest business recommendations and updates</p>
+            <div class="max-w-md mx-auto flex">
+                <input type="email" placeholder="Your email address" class="flex-1 p-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                <button class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-r-md transition duration-300">
+                    Subscribe
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">About</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">About White Lamma</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Careers</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Press</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Investor Relations</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Trust & Safety</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Content Guidelines</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Discover</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">White Lamma Project Cost Guides</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Collections</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Talk</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Events</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">White Lamma Blog</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">For Businesses</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Business Owner Login</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Claim your Business Page</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Advertise on White Lamma</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">White Lamma for Business</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Business Success Stories</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition duration-300">Business Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4 mb-6">
+                        <a href="#" class="text-gray-300 hover:text-white text-2xl transition duration-300"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white text-2xl transition duration-300"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white text-2xl transition duration-300"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white text-2xl transition duration-300"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white text-2xl transition duration-300"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">White Lamma Mobile</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-white text-2xl transition duration-300"><i class="fab fa-apple"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white text-2xl transition duration-300"><i class="fab fa-android"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2023 White Lamma Inc. White Lamma and related marks are registered trademarks of White Lamma.</p>
+                <div class="flex justify-center space-x-4 mt-4">
+                    <a href="#" class="hover:text-white transition duration-300">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition duration-300">Terms of Service</a>
+                    <a href="#" class="hover:text-white transition duration-300">Cookie Policy</a>
+                    <a href="#" class="hover:text-white transition duration-300">Do Not Sell My Info</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Navbar scroll effect
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Initialize navbar state
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        }
+    </script>
+</body>
+</html>
